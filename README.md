@@ -69,7 +69,6 @@ cd rutdemo
 ./bin/rails db:migrate
 
 bundle add rails-uninstaller-tasks --git "https://github.com/rubys/rails-uninstaller-tasks"
-bundle install
 
 ./bin/rails tailwindcss:uninstall
 ./bin/rails stimulus:uninstall
