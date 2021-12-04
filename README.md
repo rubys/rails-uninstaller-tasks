@@ -12,7 +12,7 @@ Rails without any js bundlers at all, and only sprockets for managing
 my assets.  I feel it would be a darn shame if more people didn't give this
 configuration a try because they *might* need more later.  Or worse,
 people giving it a try and then finding that they have reached a dead end
-where they can't addon esbuild later.
+where they can't add esbuild or another js bundler later.
 
 But first, backing up.  Here's a relevant excerpt from Rails is omakase:
 
@@ -36,7 +36,7 @@ want to add esbuild and do a little googling, you will be lead to
 
 The first problem is that importmaps and jsbunding are mutually exclusive options, meaning that you need to uninstall import maps before you can safely install jsbunding-rails.  The second problem is that things like turbo, stimulus, and tailwindcss install differently when import maps is used than when jsbunding is used.
 
-So, you have at this point a fine mess, and at the current time, precious little in the way of documentation or tooling describing how to proceed.
+So, you have at this point a fine mess, and at the current time, precious little in the way of documentation or tooling describing how to proceed.  Which is entirely understandable given that Rails 7 only in alpha release at this time.
 
 This quick and dirty plugin is a modest step towards addressing that need.  It was put together in less than a day, and hopefully follow-on work will extend this to support the uninstallation of other components and to higher level tasks that will detect what components are already installed, remove them in the correct order, and then reinstall them with a different js configuration.
 
