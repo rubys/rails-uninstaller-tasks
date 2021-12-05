@@ -47,9 +47,13 @@ Ideally, this will not remain as a separate plugin, but will rather migrate into
 Following is a script that will 
   * clone rails main from github
   * build a new project with tailwind and importmaps
-  * generate a model/view/controller using scaffolding as well as a stimulus controller
+  * do a few development tasks 
+    * generate a model/view/controller using scaffolding
+    * generate a stimulus controller
+    * "pin" the lit package from jspm
   * uninstall tailwindcss, stimulus, turbo, and import maps
-  * install esbuild, stimulus, turbo, and import maps
+  * install esbuild, turbo, stimulus, and tailwindcss
+  * output the config/importmap.REVIEWMAP file
 
 ```
 rm -rf rutdemo
@@ -67,6 +71,7 @@ cd rutdemo
 ./bin/rails generate scaffold book title
 ./bin/rails generate stimulus check
 ./bin/rails db:migrate
+./bin/importmap pin lit
 
 bundle add rails-uninstaller-tasks --git "https://github.com/rubys/rails-uninstaller-tasks"
 
@@ -89,6 +94,10 @@ bundle add cssbundling-rails
 ./bin/rails stimulus:manifest:update
 yarn build
 yarn build:css
+
+if [ -e config/importmap.REVIEWME ]; then
+  cat config/importmap.REVIEWME
+fi
 ```
 
 ## License

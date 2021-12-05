@@ -27,7 +27,15 @@ if (sprockets_manifest_path = Rails.root.join("app/assets/config/manifest.js")).
   gsub_file sprockets_manifest_path, %(//= link_tree ../../../vendor/javascript .js\n), ''
 end
 
+importmap = IO.read Rails.root.join("config/importmap.rb")
+importmap.sub! /\n\s*pin "application".*/, "\n"
 remove_file "config/importmap.rb"
+empty = importmap.split("\n").all? do |line|
+  line =~ %r{^\s*(#.*)?$}
+end
+importmap.sub! /\A# Pin npm.*\n/, ''
+importmap.sub! /\A/, "# Review the following for potential additions to package.json\n"
+create_file "config/importmap.REVIEWME", importmap unless empty
 
 say "Remove binstub"
 remove_file "bin/importmap"
